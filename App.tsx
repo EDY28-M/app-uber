@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Platform, View, Text } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AppNavigator from './src/navigation/AppNavigator';
 
 export default function App() {
@@ -19,30 +20,38 @@ export default function App() {
   // Show loading for a brief moment to ensure proper initialization
   if (!isLoaded) {
     return (
-      <SafeAreaProvider>
-        <View style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#F9FAFB'
-        }}>
-          <Text style={{
-            fontSize: 18,
-            color: '#3B82F6',
-            fontWeight: '600'
-          }}>
-            Cargando UberApp...
-          </Text>
-        </View>
-        <StatusBar style="auto" />
-      </SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <SafeAreaProvider>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#F9FAFB',
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                color: '#3B82F6',
+                fontWeight: '600',
+              }}
+            >
+              Cargando UberApp...
+            </Text>
+          </View>
+          <StatusBar style="auto" />
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
     );
   }
 
   return (
-    <SafeAreaProvider>
-      <AppNavigator />
-      <StatusBar style="auto" />
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <AppNavigator />
+        <StatusBar style="auto" />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
